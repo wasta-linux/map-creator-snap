@@ -19,7 +19,7 @@ downloaded again for Map Creator.
   - wine-platform-6-stable [338 MB]
   - wine-platform-runtime [363 MB]
 
-#### winetricks installs [18 MB]
+#### winetricks installs [11 MB]
 
 - corefonts (11 total) [4 MB]
 - vcrun2013 [7 MB]
