@@ -27,6 +27,7 @@ apps:
     environment:
       INSTALL_URL: "https://s3.amazonaws.com/fmosoft/MapCreatorSetup-x64-2.3.2.exe"
       # INSTALL_EXE: "${SNAP}/installer/setup.exe"
+      INSTALL_FLAGS: "/quiet"
       RUN_EXE: "C:/Program Files/FMOsoft/MapCreator/MapCreator.exe"
     command: bin/sommelier run-exe
     #desktop: gui/cardsorter.desktop
