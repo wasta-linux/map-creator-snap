@@ -68,7 +68,7 @@ plugs:
   desktop:
   desktop-legacy:
   home:
-  # network:
+  network:
   # network-bind:
   removable-media:
   x11:
