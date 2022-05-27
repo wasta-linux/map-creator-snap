@@ -1,6 +1,6 @@
 name: map-creator-unofficial
-# base: core18
-base: core20
+base: core18
+# base: core20
 # adopt-info: installer
 version: '2.3.2'
 grade: devel
@@ -22,8 +22,8 @@ environment:
 
 apps:
   map-creator:
-    extensions: [gnome-3-38] # core20
-    # extensions: [gnome-3-28] # core18
+    # extensions: [gnome-3-38] # core20
+    extensions: [gnome-3-28] # core18
     environment:
       INSTALL_URL: "https://s3.amazonaws.com/fmosoft/MapCreatorSetup-x64-2.3.2.exe"
       # INSTALL_EXE: "${SNAP}/installer/setup.exe"
@@ -32,15 +32,15 @@ apps:
     #desktop: gui/cardsorter.desktop
 
   init:
-    extensions: [gnome-3-38] # core20
-    # extensions: [gnome-3-28] # core18
+    # extensions: [gnome-3-38] # core20
+    extensions: [gnome-3-28] # core18
     command: bin/sommelier
     environment:
       INIT: '1'
 
   wine:
-    extensions: [gnome-3-38] # core20
-    # extensions: [gnome-3-28] # core18
+    # extensions: [gnome-3-38] # core20
+    extensions: [gnome-3-28] # core18
     command: bin/sommelier
     # plugs:
     #   - home
@@ -50,13 +50,13 @@ apps:
     #   - system-trace
 
   winecfg:
-    extensions: [gnome-3-38] # core20
-    # extensions: [gnome-3-28] # core18
+    # extensions: [gnome-3-38] # core20
+    extensions: [gnome-3-28] # core18
     command: bin/sommelier winecfg
 
   winetricks:
-    extensions: [gnome-3-38] # core20
-    # extensions: [gnome-3-28] # core18
+    # extensions: [gnome-3-38] # core20
+    extensions: [gnome-3-28] # core18
     command: bin/sommelier winetricks
     # plugs:
     #   - network # for downloading
@@ -76,14 +76,14 @@ plugs:
     interface: content
     target: $SNAP/wine-runtime
     default-provider: wine-platform-runtime
-  wine-7-stable: # number must match the number in default-provider
+  # wine-7-stable: # number must match the number in default-provider
   # wine-6-staging: # number must match the number in default-provider
-  # wine-6-stable: # number must match the number in default-provider
+  wine-6-stable: # number must match the number in default-provider
     interface: content
     target: $SNAP/wine-platform
-    # default-provider: wine-platform-6-stable # must be a valid snap
+    default-provider: wine-platform-6-stable # must be a valid snap
     # default-provider: wine-platform-6-staging # must be a valid snap
-    default-provider: wine-platform-7-stable-core20 # must be a valid snap
+    # default-provider: wine-platform-7-stable-core20 # must be a valid snap
 
 parts:
   # installer:
@@ -112,9 +112,9 @@ parts:
   sommelier-core:
     plugin: make
     source: https://github.com/snapcrafters/sommelier-core.git
-    # source-branch: "1.0" # core18
+    source-branch: "1.0" # core18
     # need "master" for core20 b/c of https://github.com/mmtrt/sommelier-core/commit/096bb179b975df5a89e88b3bac048901ded465fc
-    source-branch: "master"
+    # source-branch: "master"
     override-prime: |
       snapcraftctl prime
 
