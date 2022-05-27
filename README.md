@@ -1,4 +1,4 @@
-# map-creator-snap snap package
+# map-creator-unofficial snap package
 
 - Makes use of wine and wine runtime snaps to minimize this snap's size and reduce the maintenance burden.
 - Downloads MapCreatorSetup-x64-2.3.2.exe installer from FMOsoft, unless already present in ~/Downloads.
