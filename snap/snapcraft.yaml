@@ -3,12 +3,12 @@ base: core18
 # base: core20
 # adopt-info: installer
 version: '2.3.2'
-grade: devel
+grade: stable
 summary: Create language-specific maps, charts, diagrams, and timelines.
 description: |
   Map Creator simplifies the creation of language-specific maps, charts, diagrams, and timelines for Bible lessons and world geography.
 
-confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: strict # use 'strict' once you have the right plugs and slots
 architectures:
   - amd64
 
