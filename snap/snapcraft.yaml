@@ -26,15 +26,13 @@ layout:
 
 apps:
   map-creator:
-    # extensions: [gnome-3-38] # core20
-    extensions: [gnome-3-28] # core18
+    extensions: [gnome-3-38] # core20
+    # extensions: [gnome-3-28] # core18
     environment:
       INSTALL_URL: "https://s3.amazonaws.com/fmosoft/MapCreatorSetup-x64-2.3.2.exe"
-      # INSTALL_EXE: "${SNAP}/installer/setup.exe"
       INSTALL_FLAGS: "/quiet"
       RUN_EXE: "C:/Program Files/FMOsoft/MapCreator/MapCreator.exe"
     command: bin/sommelier run-exe
-    #desktop: gui/cardsorter.desktop
 
   init:
     extensions: [gnome-3-38] # core20
@@ -47,12 +45,6 @@ apps:
     extensions: [gnome-3-38] # core20
     # extensions: [gnome-3-28] # core18
     command: bin/sommelier
-    # plugs:
-    #   - home
-    #   - network
-    #   - process-control
-    #   - system-observe
-    #   - system-trace
 
   winecfg:
     extensions: [gnome-3-38] # core20
@@ -63,8 +55,6 @@ apps:
     extensions: [gnome-3-38] # core20
     # extensions: [gnome-3-28] # core18
     command: bin/sommelier winetricks
-    # plugs:
-    #   - network # for downloading
 
 plugs:
   # audio-playback:
@@ -102,7 +92,7 @@ parts:
     source: https://github.com/snapcrafters/sommelier-core.git
     # source-branch: "1.0" # core18
     # need "master" for core20 b/c of https://github.com/mmtrt/sommelier-core/commit/096bb179b975df5a89e88b3bac048901ded465fc
-    # source-branch: "master"
+    source-branch: "master" # core20
     override-prime: |
       snapcraftctl prime
 
