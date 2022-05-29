@@ -1,6 +1,6 @@
 name: map-creator-unofficial
-base: core18
-# base: core20
+# base: core18
+base: core20
 # adopt-info: installer
 version: '2.3.2'
 # grade: devel
@@ -9,7 +9,7 @@ summary: Create language-specific maps, charts, diagrams, and timelines.
 description: |
   Map Creator simplifies the creation of language-specific maps, charts, diagrams, and timelines for Bible lessons and world geography.
 
-confinement: strict # use 'strict' once you have the right plugs and slots
+confinement: strict
 architectures:
   - amd64
 
@@ -19,7 +19,10 @@ contact: https://github.com/wasta-linux/map-creator-snap
 environment:
   TRICKS: "corefonts vcrun2013"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
-  # XDG_CACHE_HOME: $SNAP_REAL_HOME/.cache # won't work with full confinement b/c of hidden dir
+
+layout:
+  /etc/wgetrc:
+    symlink: $SNAP/etc/wgetrc
 
 apps:
   map-creator:
@@ -34,15 +37,15 @@ apps:
     #desktop: gui/cardsorter.desktop
 
   init:
-    # extensions: [gnome-3-38] # core20
-    extensions: [gnome-3-28] # core18
+    extensions: [gnome-3-38] # core20
+    # extensions: [gnome-3-28] # core18
     command: bin/sommelier
     environment:
       INIT: '1'
 
   wine:
-    # extensions: [gnome-3-38] # core20
-    extensions: [gnome-3-28] # core18
+    extensions: [gnome-3-38] # core20
+    # extensions: [gnome-3-28] # core18
     command: bin/sommelier
     # plugs:
     #   - home
@@ -52,13 +55,13 @@ apps:
     #   - system-trace
 
   winecfg:
-    # extensions: [gnome-3-38] # core20
-    extensions: [gnome-3-28] # core18
+    extensions: [gnome-3-38] # core20
+    # extensions: [gnome-3-28] # core18
     command: bin/sommelier winecfg
 
   winetricks:
-    # extensions: [gnome-3-38] # core20
-    extensions: [gnome-3-28] # core18
+    extensions: [gnome-3-38] # core20
+    # extensions: [gnome-3-28] # core18
     command: bin/sommelier winetricks
     # plugs:
     #   - network # for downloading
@@ -78,31 +81,14 @@ plugs:
     interface: content
     target: $SNAP/wine-runtime
     default-provider: wine-platform-runtime
-  # wine-7-stable: # number must match the number in default-provider
-  # wine-6-staging: # number must match the number in default-provider
-  wine-6-stable: # number must match the number in default-provider
+  wine-7-stable:
+  # wine-6-stable:
     interface: content
     target: $SNAP/wine-platform
-    default-provider: wine-platform-6-stable # must be a valid snap
-    # default-provider: wine-platform-6-staging # must be a valid snap
-    # default-provider: wine-platform-7-stable-core20 # must be a valid snap
+    # default-provider: wine-platform-6-stable
+    default-provider: wine-platform-7-stable-core20
 
 parts:
-  # installer:
-  #   plugin: dump
-  #   source: installer/
-  #   build-packages:
-  #     - unzip
-  #   override-build: |
-  #     installer_zipname=$(find $SNAPCRAFT_PART_BUILD -maxdepth 1 -name 'CardSorterWPF*.zip' -exec basename {} \;)
-  #     version=$(echo "$installer_zipname" | grep -Eo '[0-9]{8}')
-  #     snapcraftctl set-version "$version"
-  #     snapcraftctl set-grade "devel"
-  #     unzip ${SNAPCRAFT_PART_BUILD}/CardSorterWPF*.zip -d ${SNAPCRAFT_PART_INSTALL}/installer
-  #     # snapcraftctl build
-  #   stage:
-  #     - installer/
-
   hooks:
     plugin: dump
     source: hooks/
@@ -114,7 +100,7 @@ parts:
   sommelier-core:
     plugin: make
     source: https://github.com/snapcrafters/sommelier-core.git
-    source-branch: "1.0" # core18
+    # source-branch: "1.0" # core18
     # need "master" for core20 b/c of https://github.com/mmtrt/sommelier-core/commit/096bb179b975df5a89e88b3bac048901ded465fc
     # source-branch: "master"
     override-prime: |
