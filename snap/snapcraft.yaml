@@ -82,7 +82,8 @@ parts:
     plugin: make
     source: https://github.com/snapcrafters/sommelier-core.git
     # need "master" for core 20 b/c of https://github.com/mmtrt/sommelier-core/commit/096bb179b975df5a89e88b3bac048901ded465fc
-    source-branch: "master"
+    # source-branch: "master"
+    source-branch: "1.0"
     override-prime: |
       snapcraftctl prime
 
@@ -94,6 +95,3 @@ parts:
 
       # Add init-only command.
       sed -r -i 's|(\s+)(init_wine)$|\1\2\n\1if [[ $INIT == '1' ]]; then exit 0; fi|' bin/sommelier
-
-      # Copy cached winetricks in $SNAP_REAL_HOME before installing winetricks.
-      sed -r -i 's@(^install_app\(\).*)@\1\n  cp -r "${SNAP_REAL_HOME}/.cache/winetricks" "${SNAP_USER_COMMON}/.cache" || true@' bin/sommelier
