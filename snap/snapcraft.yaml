@@ -88,8 +88,8 @@ parts:
       snapcraftctl prime
 
       # Set $WINELOADER (wine) and $WINE (winetricks) to use wine64 executable.
-      sed -r -i 's|(\$WINE_PLATFORM/bin/wine)|\164|' bin/sommelier
-      sed -r -i 's|(\$WINE_PLATFORM/bin/wine64")|\1\nexport WINE="$WINELOADER"\nexport WINEARCH=win64|' bin/sommelier
+      #sed -r -i 's|(\$WINE_PLATFORM/bin/wine)|\164|' bin/sommelier
+      sed -r -i 's|(^.*\$WINE_PLATFORM/bin/wine"$)|export WINEARCH=win64\n\1\nexport WINE="$WINELOADER"|' bin/sommelier
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
