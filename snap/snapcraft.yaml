@@ -27,7 +27,7 @@ apps:
     extensions: [gnome-3-38]
     environment:
       INSTALL_URL: "https://s3.amazonaws.com/fmosoft/MapCreatorSetup-x64-2.3.2.exe"
-      INSTALL_FLAGS: "/quiet"
+      # INSTALL_FLAGS: "/quiet"
       RUN_EXE: "C:/Program Files/FMOsoft/MapCreator/MapCreator.exe"
     command: bin/sommelier run-exe
 
