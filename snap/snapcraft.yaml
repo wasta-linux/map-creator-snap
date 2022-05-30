@@ -81,11 +81,14 @@ parts:
   sommelier-core:
     plugin: make
     source: https://github.com/snapcrafters/sommelier-core.git
-    # need "master" for core 20 b/c of https://github.com/mmtrt/sommelier-core/commit/096bb179b975df5a89e88b3bac048901ded465fc
-    # source-branch: "master"
-    source-branch: "1.0"
+    # Need "master" for core 20 b/c of https://github.com/mmtrt/sommelier-core/commit/096bb179b975df5a89e88b3bac048901ded465fc
+    # The part fails to build otherwise.
+    source-branch: "master"
     override-prime: |
       snapcraftctl prime
+
+      # Force use of wine64 executable.
+      sed -r -i 's|($WINE_PLATFORM/bin/wine)|\164|' bin/sommelier
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
