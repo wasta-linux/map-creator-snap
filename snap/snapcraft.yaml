@@ -18,8 +18,8 @@ environment:
   TRICKS: "corefonts vcrun2013"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
   WINEARCH: "win64"
-  WINELOADER: "${WINE_PLATFORM}/bin/wine"
-  WINE: "${WINE_PLATFORM}/bin/wine"
+  WINELOADER: "${SNAP}/wine-platform/wine-7-stable/bin/wine"
+  WINE: "${SNAP}/wine-platform/wine-7-stable/bin/wine"
 
 apps:
   map-creator:
@@ -44,8 +44,8 @@ apps:
     extensions: [gnome-3-38]
     command: bin/sommelier
     environment:
-      WINELOADER: "${WINE_PLATFORM}/bin/wine64"
-      WINE: "${WINE_PLATFORM}/bin/wine64"
+      WINELOADER: "${SNAP}/wine-platform/wine-7-stable/bin/wine64"
+      WINE: "${SNAP}/wine-platform/wine-7-stable/bin/wine64"
 
   winecfg:
     extensions: [gnome-3-38]
