@@ -94,7 +94,7 @@ parts:
       snapcraftctl prime
 
       # Remove WINELOADER assignment from script (assigned above instead).
-      sed -r -i 's|^export WINELOADER=\$WINE_PLATFORM/bin/wine"$||' bin/sommelier
+      sed -r -i 's|^export WINELOADER="\$WINE_PLATFORM/bin/wine"$||' bin/sommelier
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
