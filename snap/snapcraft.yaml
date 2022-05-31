@@ -18,17 +18,17 @@ environment:
   TRICKS: "corefonts vcrun2013"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
   WINEARCH: "win64"
-  WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine"
-  WINE: "${SNAP}/wine-platform/wine-stable/bin/wine"
+  WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine64"
+  WINE: "${SNAP}/wine-platform/wine-stable/bin/wine64"
 
 apps:
   map-creator:
     extensions: [gnome-3-38]
+    command: bin/sommelier run-exe
     environment:
       INSTALL_URL: "https://s3.amazonaws.com/fmosoft/MapCreatorSetup-x64-2.3.2.exe"
-      # INSTALL_FLAGS: "/quiet"
+      INSTALL_FLAGS: "/quiet"
       RUN_EXE: "C:/Program Files/FMOsoft/MapCreator/MapCreator.exe"
-    command: bin/sommelier run-exe
 
   init:
     extensions: [gnome-3-38]
@@ -39,13 +39,16 @@ apps:
   wine:
     extensions: [gnome-3-38]
     command: bin/sommelier
+    environment:
+      WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine"
+      WINE: "${SNAP}/wine-platform/wine-stable/bin/wine"
 
   wine64:
     extensions: [gnome-3-38]
     command: bin/sommelier
-    environment:
-      WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine64"
-      WINE: "${SNAP}/wine-platform/wine-stable/bin/wine64"
+    # environment:
+      # WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine64"
+      # WINE: "${SNAP}/wine-platform/wine-stable/bin/wine64"
 
   winecfg:
     extensions: [gnome-3-38]
