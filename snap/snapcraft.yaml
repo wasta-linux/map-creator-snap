@@ -17,9 +17,9 @@ contact: https://github.com/wasta-linux/map-creator-snap
 environment:
   TRICKS: "corefonts vcrun2013"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
-  WINEARCH: "win64"
-  WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine64"
-  WINE: "${SNAP}/wine-platform/wine-stable/bin/wine64"
+  # WINEARCH: "win64"
+  # WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine64"
+  # WINE: "${SNAP}/wine-platform/wine-stable/bin/wine64"
 
 apps:
   map-creator:
@@ -39,16 +39,13 @@ apps:
   wine:
     extensions: [gnome-3-38]
     command: bin/sommelier
-    environment:
-      WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine"
-      WINE: "${SNAP}/wine-platform/wine-stable/bin/wine"
 
   wine64:
     extensions: [gnome-3-38]
     command: bin/sommelier
-    # environment:
-      # WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine64"
-      # WINE: "${SNAP}/wine-platform/wine-stable/bin/wine64"
+    environment:
+      WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine64"
+      WINE: "${SNAP}/wine-platform/wine-stable/bin/wine64"
 
   winecfg:
     extensions: [gnome-3-38]
@@ -72,7 +69,7 @@ plugs:
   wine-runtime:
     interface: content
     target: $SNAP/wine-runtime
-    default-provider: wine-platform-runtime
+    default-provider: wine-platform-runtime-core20
   wine-7-stable:
     interface: content
     target: $SNAP/wine-platform
@@ -92,12 +89,9 @@ parts:
     source: https://github.com/snapcrafters/sommelier-core.git
     # Need "master" for core 20 b/c of https://github.com/mmtrt/sommelier-core/commit/096bb179b975df5a89e88b3bac048901ded465fc
     # The part fails to build otherwise.
-    source-branch: "master"
+    source-branch: "1.0"
     override-prime: |
       snapcraftctl prime
-
-      # Remove WINELOADER assignment from script (assigned above instead).
-      sed -r -i 's|^export WINELOADER="\$WINE_PLATFORM/bin/wine"$||' bin/sommelier
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
