@@ -1,0 +1,91 @@
+name: map-creator-unofficial
+base: core18
+version: '2.3.2'
+grade: stable
+summary: Create language-specific maps, charts, diagrams, and timelines.
+description: |
+  Map Creator simplifies the creation of language-specific maps, charts, diagrams, and timelines for Bible lessons and world geography.
+
+confinement: strict
+architectures:
+  - amd64
+
+license: GPL-3.0+
+contact: https://github.com/wasta-linux/map-creator-snap
+
+environment:
+  SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
+  TRICKS: "corefonts vcrun2013"
+  WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
+
+apps:
+  map-creator:
+    command: bin/sommelier run-exe
+    extensions: [gnome-3-28]
+    environment:
+      INSTALL_URL: "https://s3.amazonaws.com/fmosoft/MapCreatorSetup-x64-2.3.2.exe"
+      INSTALL_FLAGS: "/quiet"
+      RUN_EXE: "C:/Program Files/FMOsoft/MapCreator/MapCreator.exe"
+
+  init:
+    command: bin/sommelier
+    extensions: [gnome-3-28]
+    environment:
+      INIT: '1'
+
+  wine:
+    command: bin/sommelier
+    extensions: [gnome-3-28]
+
+  winecfg:
+    command: bin/sommelier winecfg
+    extensions: [gnome-3-28]
+
+  winetricks:
+    command: bin/sommelier winetricks
+    extensions: [gnome-3-28]
+
+plugs:
+  # audio-playback:
+  desktop:
+  desktop-legacy:
+  home:
+  network:
+  # network-bind:
+  removable-media:
+  x11:
+  wayland:
+
+  wine-runtime:
+    interface: content
+    target: $SNAP/wine-runtime
+    default-provider: wine-platform-runtime
+  wine-6-stable:
+    interface: content
+    target: $SNAP/wine-platform
+    default-provider: wine-platform-6-stable
+
+parts:
+  hooks:
+    plugin: dump
+    source: hooks/
+    organize:
+      "*": sommelier/hooks/
+    stage:
+      - sommelier
+
+  sommelier-core:
+    plugin: make
+    source: https://github.com/snapcrafters/sommelier-core.git
+    source-branch: "1.0"
+    override-prime: |
+      snapcraftctl prime
+
+      # Don't let yad dialogs stay always-on-top.
+      sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
+      # Remove annoying yad dialog for interactive MSI install.
+      sed -r -i 's|(yes.*Installing .*EXE_NAME.*)|# \1|' bin/sommelier
+      sed -r -i 's|(.*INSTALL_YAD_PID)|# \1|g' bin/sommelier
+
+      # Add init-only command.
+      sed -r -i 's|(\s+)(init_wine)$|\1\2\n\1if [[ $INIT == '1' ]]; then exit 0; fi|' bin/sommelier
