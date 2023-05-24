@@ -23,7 +23,7 @@ environment:
   WINEDLLOVERRIDES: "$WINEDLLOVERRIDES;mscoree=;mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
 
 apps:
-  map-creator:
+  map-creator-unofficial:
     extensions: [gnome-3-38]
     command: bin/sommelier run-exe
     environment:
