@@ -17,6 +17,7 @@ architectures:
 
 environment:
   INSTALLER_NAME: "MapCreatorSetup-x64-2.3.2.exe"
+  SOMMELIER_NO_THEME: "true" # avoid theme errors
   SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
   TRICKS: "corefonts vcrun2013"
   WINEDLLOVERRIDES: "$WINEDLLOVERRIDES;mscoree=;mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
