@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Map Creator
-Comment=Create Bible maps (unofficial snap package)
+Comment=Create Bible maps (snap via WINE)
 Exec=map-creator-unofficial.map-creator
 Icon=${SNAP}/meta/gui/map-creator.unofficial.png
 Terminal=false
