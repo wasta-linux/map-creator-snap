@@ -1,16 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Set version to Windows 10.
-# "$WINELOADER" winecfg /v win10
-
-# Set winetricks cache root dir.
-
+"$WINELOADER" winecfg /v win10
 
 # Use local installer in user Downloads folder if present.
 dl_dir=$(xdg-user-dir DOWNLOAD)
-if [[ -e "${dl_dir}/MapCreatorSetup-x64-2.3.2.exe" ]]; then
+if [[ -e "${dl_dir}/${INSTALLER_NAME}" ]]; then
     # Unset INSTALL_URL from snapcraft.yaml.
     export INSTALL_URL=
     # Set INSTALL_EXE.
-    export INSTALL_EXE="${dl_dir}/MapCreatorSetup-x64-2.3.2.exe"
+    export INSTALL_EXE="${dl_dir}/${INSTALLER_NAME}"
 fi
