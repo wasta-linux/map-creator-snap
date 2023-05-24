@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make a backup of user settings.
 backup_dir="${SNAP_USER_COMMON}/backups"
 mc_settings_dir="${SNAP_USER_COMMON}/.wine/drive_c/ProgramData/FMOsoft/MapCreator"
