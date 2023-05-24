@@ -6,19 +6,18 @@ grade: stable
 summary: Create language-specific maps, charts, diagrams, and timelines.
 description: |
   Map Creator simplifies the creation of language-specific maps, charts, diagrams, and timelines for Bible lessons and world geography.
-
 confinement: strict
-architectures:
-  - amd64
-
 license: Proprietary
 website: https://github.com/wasta-linux/map-creator-snap
 contact: nate_marti@sil.org
 issues: https://github.com/wasta-linux/map-creator-snap/issues
 icon: snap/gui/map-creator-unofficial.png
+architectures:
+  - amd64
 
 environment:
   INSTALLER_NAME: "MapCreatorSetup-x64-2.3.2.exe"
+  SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
   TRICKS: "corefonts vcrun2013"
   WINEDLLOVERRIDES: "$WINEDLLOVERRIDES;mscoree=;mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
 
