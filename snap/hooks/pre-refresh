@@ -4,6 +4,7 @@
 backup_dir="${SNAP_USER_COMMON}/backups"
 mc_settings_dir="${SNAP_USER_COMMON}/.wine/drive_c/ProgramData/FMOsoft/MapCreator"
 if [[ ! -d "$mc_settings_dir" ]]; then
+    echo "No user config to back up in $mc_settings_dir"
     exit 0
 fi
 mkdir -p "$backup_dir"
