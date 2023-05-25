@@ -1,17 +1,16 @@
-#!/bin/bash -ex
+#!/bin/sh
 
 # Make a backup of user settings.
 backup_dir="${SNAP_USER_COMMON}/backups"
 mc_settings_dir="${SNAP_USER_COMMON}/.wine/drive_c/ProgramData/FMOsoft/MapCreator"
-if [[ ! -d "$mc_settings_dir" ]]; then
+if [ ! -d "$mc_settings_dir" ]; then
     exit 0
 fi
 mkdir -p "$backup_dir"
 today=$(date -I)
-names=( "app_settings.ini" "registration.ini" )
-for name in "${names[@]}"; do
+for name in "app_settings.ini" "registration.ini"; do
     echo "Backing up ${mc_settings_dir}/${name}..."
-    if [[ -f "${mc_settings_dir}/${name}" ]]; then
+    if [ -f "${mc_settings_dir}/${name}" ]; then
         cp -f "${mc_settings_dir}/${name}" "${backup_dir}/${name}.${today}.bak"
     fi
 done
