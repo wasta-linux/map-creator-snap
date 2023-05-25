@@ -9,15 +9,15 @@ These are all the snap dependencies that might need to be downloaded. If other s
 packages on your system already use some of them, then they won't need to be
 downloaded again for Map Creator.
 
-#### snap packages [1063 MB]:
+#### snap packages [~1.5 GB if none are already installed]:
 
 - map-creator-unofficial [< 1MB]
-  - snapd [46 MB]
-  - core18 [58 MB]
-  - gnome-3-28-1804 [172 MB]
-    - gtk-common-themes [85 MB]
-  - wine-platform-6-stable [338 MB]
-  - wine-platform-runtime [363 MB]
+  - snapd [50+ MB]
+  - core20 [60+ MB]
+  - gnome-3-38-2004 [350+ MB]
+    - gtk-common-themes [90+ MB]
+  - wine-platform-7-stable-core20 [400+ MB]
+  - wine-platform-runtime [500+ MB]
 
 #### winetricks installs [18 MB]
 
