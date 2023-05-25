@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 # Make a backup of user settings.
 backup_dir="${SNAP_USER_COMMON}/backups"
