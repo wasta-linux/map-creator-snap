@@ -11,3 +11,21 @@ if [[ -e "${dl_dir}/${INSTALLER_NAME}" ]]; then
     # Set INSTALL_EXE.
     export INSTALL_EXE="${dl_dir}/${INSTALLER_NAME}"
 fi
+
+# Add user folders to Favorites.
+user_dirs=(
+    DESKTOP
+    DOWNLOAD
+    DOCUMENTS
+    MUSIC
+    PICTURES
+    VIDEOS
+)
+wine_faves="${WINEPREFIX}/drive_c/users/${USER}/Favorites"
+for d in "${user_dirs[@]}"; do
+    dpath="$(xdg-user-dir "$d")"
+    dname="$(basename "$dpath")"
+    if [[ -d "$dpath" && ! -L "${wine_faves}/${dname}" ]]; then
+      ln -s "$dpath" "${wine_faves}/${dname}"
+    fi
+done
